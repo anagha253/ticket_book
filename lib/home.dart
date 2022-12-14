@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:ticket_book/adminlog.dart';
 
 class home extends StatefulWidget {
-  const home({Key? key}) : super(key: key);
+  final VoidCallback register;
+  const home({Key? key, required this.register}) : super(key: key);
 
   @override
   State<home> createState() => _homeState();
@@ -11,6 +13,7 @@ class home extends StatefulWidget {
 class _homeState extends State<home> {
   final _emailcontroller = TextEditingController();
   final _pswdcontroller = TextEditingController();
+
   Future Signin() async {
     await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: _emailcontroller.text.trim(),
@@ -29,17 +32,42 @@ class _homeState extends State<home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white70,
+      drawer: Drawer(
+        backgroundColor: Colors.indigo.shade900,
+        child: ListView(
+          children: [
+            const DrawerHeader(
+              child: Padding(
+                padding: EdgeInsets.only(top: 50.0),
+                child: Text(
+                  "Menu",
+                  style: TextStyle(fontSize: 40, color: Colors.white),
+                ),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.account_circle_sharp,
+                color: Colors.white,
+                size: 30,
+              ),
+              title: const Text(
+                "Admin",
+                style: TextStyle(fontSize: 25, color: Colors.white),
+              ),
+              onTap: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const adminlog()));
+              },
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         backgroundColor: Colors.white70,
         elevation: 0,
-        leading: const Padding(
-          padding: EdgeInsets.only(top: 30.0, left: 10, bottom: 20),
-          child: Icon(
-            Icons.menu,
-            color: Colors.black,
-            size: 35,
-          ),
-        ),
+        leading: Icon(Icons.menu, color: Colors.indigo.shade900, size: 30),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -124,7 +152,7 @@ class _homeState extends State<home> {
                       ),
                     ),
                     GestureDetector(
-                      // onTap: widget.showRegisterPage,
+                      onTap: widget.register,
                       child: const Text(
                         " Register Now",
                         style: TextStyle(
