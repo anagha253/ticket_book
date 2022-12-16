@@ -10,7 +10,7 @@ class CheckLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
+    //final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),

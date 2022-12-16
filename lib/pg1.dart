@@ -70,7 +70,7 @@ class _pg1State extends State<pg1> {
               child: Align(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  'From ' + user.uid,
+                  'From ',
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -122,6 +122,32 @@ class _pg1State extends State<pg1> {
               child: Align(
                 alignment: Alignment.topLeft,
                 child: Text(
+                  'Arrival Time',
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ), //arr time
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 20.0, right: 20, top: 10, bottom: 10),
+              child: TextField(
+                controller: _artimecontroller,
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 1,
+                      color: Colors.indigo.shade900,
+                    ),
+                  ),
+                  hintText: 'Expected time to reach destination',
+                ),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 20, top: 30),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Text(
                   'Date',
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
@@ -157,32 +183,7 @@ class _pg1State extends State<pg1> {
                 },
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 20, top: 30),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  'Arrival Time',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ), //arr time
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 20.0, right: 20, top: 10, bottom: 10),
-              child: TextField(
-                controller: _artimecontroller,
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 1,
-                      color: Colors.indigo.shade900,
-                    ),
-                  ),
-                  hintText: 'Expected time to reach destination',
-                ),
-              ),
-            ),
+
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: GestureDetector(
