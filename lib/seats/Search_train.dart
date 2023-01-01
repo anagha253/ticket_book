@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:ticket_book/check_login.dart';
-import 'package:ticket_book/home.dart';
-import 'package:ticket_book/pg2.dart';
-import 'package:ticket_book/register.dart';
+import 'package:ticket_book/dummy.dart';
+import 'package:ticket_book/user_log/check_login.dart';
+import 'package:ticket_book/user_log/home.dart';
+//import 'package:ticket_book/seats/Search_train.dart.dart';
+import 'package:ticket_book/user_log/register.dart';
 import 'package:intl/intl.dart';
 
 class pg1 extends StatefulWidget {
@@ -15,13 +16,22 @@ class pg1 extends StatefulWidget {
 }
 
 class _pg1State extends State<pg1> {
+  var d;
+  var date_now;
+  final user = FirebaseAuth.instance.currentUser!;
+  final _fromcontroller = TextEditingController();
+  final _tocontroller = TextEditingController();
+  final _artimecontroller = TextEditingController();
+  final _date = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
-    final _fromcontroller = TextEditingController();
-    final _tocontroller = TextEditingController();
-    final _artimecontroller = TextEditingController();
-    final _date = TextEditingController();
+    // var d;
+    // var date_now;
+    // final user = FirebaseAuth.instance.currentUser!;
+    // final _fromcontroller = TextEditingController();
+    // final _tocontroller = TextEditingController();
+    // final _artimecontroller = TextEditingController();
+    // final _date = TextEditingController();
     //final db = FirebaseFirestore.instance;
 
     /*bool Checks() {
@@ -65,7 +75,7 @@ class _pg1State extends State<pg1> {
               ],
             ), //LOGOUT ICON-FUNCTION
 
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(left: 20, top: 30),
               child: Align(
                 alignment: Alignment.topLeft,
@@ -133,6 +143,10 @@ class _pg1State extends State<pg1> {
               child: TextField(
                 controller: _artimecontroller,
                 decoration: InputDecoration(
+                  icon: const Icon(
+                    Icons.access_time,
+                    color: Colors.black,
+                  ),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       width: 1,
@@ -141,6 +155,24 @@ class _pg1State extends State<pg1> {
                   ),
                   hintText: 'Expected time to reach destination',
                 ),
+                onTap: () async {
+                  TimeOfDay? pickartime = await showTimePicker(
+                    context: context,
+                    initialTime: TimeOfDay.now(),
+                  );
+                  var d1 = pickartime?.hour;
+                  d1 = (d1! * 3600000);
+                  var d2 = pickartime?.minute;
+                  d2 = (d2! * 60000);
+                  d = d1 + d2;
+
+                  if (pickartime != null) {
+                    String data = pickartime.format(context).toString();
+                    setState(() {
+                      _artimecontroller.text = data;
+                    });
+                  } else {}
+                },
               ),
             ),
             const Padding(
@@ -175,11 +207,13 @@ class _pg1State extends State<pg1> {
                       initialDate: DateTime.now(),
                       firstDate: DateTime(2022),
                       lastDate: DateTime(2024));
+                  date_now = pickeddate?.millisecondsSinceEpoch;
                   if (pickeddate != null) {
                     setState(() {
                       _date.text = DateFormat('yyyy-MM-dd').format(pickeddate);
                     });
-                  }
+                    date_now = date_now + d;
+                  } else {}
                 },
               ),
             ),
@@ -189,7 +223,10 @@ class _pg1State extends State<pg1> {
               child: GestureDetector(
                 onTap: () {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (BuildContext context) => const pg2()));
+                      builder: (BuildContext context) => dum(
+                          from: _fromcontroller.text.trim(),
+                          to: _tocontroller.text.trim(),
+                          time: date_now)));
                 }, //next page=>>>>pg2
                 child: Container(
                   decoration: BoxDecoration(

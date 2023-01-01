@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:ticket_book/adminlog.dart';
+//import 'package:ticket_book/admin%20logs/Adminlogin.dart';
+import 'package:ticket_book/admin%20logs/admincheck.dart';
 
 class home extends StatefulWidget {
   final VoidCallback register;
@@ -58,7 +59,7 @@ class _homeState extends State<home> {
               ),
               onTap: () {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const adminlog()));
+                    MaterialPageRoute(builder: (context) => const Check()));
               },
             ),
           ],

@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
@@ -42,7 +41,6 @@ class _RegisterState extends State<Register> {
       'lastname': lastname,
       'age': age,
       'email': email,
-      'role': "user",
     });
   }
 

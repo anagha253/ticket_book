@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ticket_book/check_login.dart';
+import 'package:ticket_book/user_log/check_login.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'home.dart';
+import 'user_log/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ticket_book/home.dart';
-import 'package:ticket_book/register.dart';
+import 'package:ticket_book/user_log/home.dart';
+import 'package:ticket_book/user_log/register.dart';
 
 class auth extends StatefulWidget {
   const auth({Key? key}) : super(key: key);
